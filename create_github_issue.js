@@ -9,29 +9,44 @@ let url = `https://api.github.com/repos/${handle}/${repo}/issues`
 
 function onFormSubmit(e)
 {
- 
-    let title = e.values[1];
-    let userID = e.values[3];
-    let description = e.values[2];
-    let org = e.values[4];
-    let goal = e.values[5];
+    const title = e.values[4];
+    const priority = e.values[9];
+    const suNet = e.values[1];
+    const app = e.values[7];
+    const otherApps = e.values[8]
+    const description = e.values[5];
+    const org = e.values[2];
+    const goal = e.values[6];
 
-    let body = `Title: ${title}
-                User ID: ${userID}
-                Org: ${org}
-                description: ${description}
-                desired outcome: ${goal}`;
+//formats github issue if the relevant variables are not empty
+    if(title && suNet && description && org && goal){
+      const body = `Title: ${title}
 
-    let payload = {
-        "title": title,
-        "body": body
-    };
+                Priority: ${priority}
+
+                Submitter SUNet: ${suNet}
+
+                Submitter organization: ${org}
+
+                App: ${app}
+
+                Other apps involved: ${otherApps}
+
+                Description of issue: ${description}
+
+                Outcome desired by submitter: ${goal}`;
+
+      const payload = {
+          "title": title,
+          "body": body
+      };
  
-    let options = {
-        "method": "POST",
-        "contentType": "application/vnd.github.v3+json",
-        "headers": {"Accept": "application/vnd.github.v3+json", "Authorization" : `token ${token}`},
-        "payload": JSON.stringify(payload)
-    };
-   let response = UrlFetchApp.fetch(url, options);
+      const options = {
+          "method": "POST",
+          "contentType": "application/vnd.github.v3+json",
+          "headers": {"Accept": "application/vnd.github.v3+json", "Authorization" : `token ${token}`},
+          "payload": JSON.stringify(payload)
+      };
+    const response = UrlFetchApp.fetch(url, options);
+  }
 }
