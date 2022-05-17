@@ -11,7 +11,7 @@ function onFormSubmit(e)
 {
     const title = e.values[4];
     const priority = e.values[9];
-    const suNet = e.values[1];
+    const userID = e.values[1];
     const app = e.values[7];
     const otherApps = e.values[8]
     const description = e.values[5];
@@ -19,12 +19,12 @@ function onFormSubmit(e)
     const goal = e.values[6];
 
 //formats github issue if the relevant variables are not empty
-    if(title && suNet && description && org && goal){
+    if(title && userID && description && org && goal){
       const body = `Title: ${title}
 
                 Priority: ${priority}
 
-                Submitter SUNet: ${suNet}
+                Submitter userID: ${userID}
 
                 Submitter organization: ${org}
 
